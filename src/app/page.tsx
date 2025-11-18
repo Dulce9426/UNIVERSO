@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { NAV_ROUTES } from "@/lib/constants"
 import { Telescope, BookOpen, Users, Radio } from "lucide-react"
-import SolarSystemCSS from '@/components/3d/SolarSystemCSS'
+import SolarRadar from "@/components/features/SolarRadar"
 
 export default function HomePage() {
   const features = [
@@ -29,10 +29,7 @@ export default function HomePage() {
   ]
 
   return (
-    <main className="min-h-screen bg-cosmos-deep relative">
-      {/* Sistema Solar 3D de fondo (CSS) */}
-      <SolarSystemCSS />
-      
+    <main className="min-h-screen bg-cosmos-deep relative overflow-hidden">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center z-10">
         <div className="container mx-auto px-4 py-16 relative z-20">
@@ -107,6 +104,22 @@ export default function HomePage() {
               conspiración, proporcionamos análisis claros y fundamentados para ayudarte a 
               comprender la realidad del universo.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Exploración Interactiva */}
+      <section className="relative py-20 border-t border-white/10 z-20 bg-cosmos-deep">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-cosmos-starlight-white mb-4 text-center">
+              Mapa Táctico del Sistema Solar
+            </h2>
+            <p className="text-lg text-cosmos-starlight-gray-light text-center mb-12 max-w-2xl mx-auto">
+              Explora los planetas de nuestro sistema solar. Haz clic en cualquier planeta o usa los botones 
+              para ver información detallada.
+            </p>
+            <SolarRadar />
           </div>
         </div>
       </section>
