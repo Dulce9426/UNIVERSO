@@ -1,0 +1,46 @@
+# Cosmos Truth - Reglas del Proyecto
+
+## Contexto del Proyecto
+Plataforma web educativa y de análisis sobre astronomía y teorías de conspiración. Objetivo: educar y calmar la ansiedad mediante datos científicos y un entorno visual inmersivo.
+
+## Stack Tecnológico (OBLIGATORIO)
+- Framework: Next.js 15 (App Router, TypeScript)
+- Estilos: Tailwind CSS + clsx + tailwind-merge
+- Componentes UI: shadcn/ui (Radix primitives)
+- Iconos: Lucide React
+- 3D: React Three Fiber (@react-three/fiber, @react-three/drei)
+- Base de Datos/Auth: Supabase (Client & Server Actions)
+- Estado: React Context + TanStack Query
+
+## Estructura de Rutas (Sitemap)
+1. / (Landing): Hero inmersivo con Escena 3D del Sistema Solar
+2. /radar: Noticias en tiempo real (API NASA/Spaceflight)
+3. /bitacora: Blog CMS (Artículos educativos y conspiraciones)
+4. /comunidad: Foro de discusión (Hilos y comentarios)
+5. /auth: Login y Registro
+
+## Reglas de Código
+- Usar siempre 'export default function' para componentes de página
+- Priorizar Server Components donde sea posible
+- Usar Arrow Functions para handlers y funciones auxiliares
+- Mantener el código modular en /components
+- Separar componentes por tipo: layout, ui, features, 3d
+
+## Reglas de Diseño (UI/UX)
+- Tema: "Deep Space" (Fondos oscuros #0a0a0a, textos blancos/grises, acentos Cyan/Neon)
+- Efectos: Glassmorphism para tarjetas y paneles
+- Tipografía: Fuente sans-serif moderna y legible (Inter o Geist)
+- Modo oscuro forzado (no toggle)
+
+## Estructura de Directorios
+- src/app/ (rutas y layouts)
+- src/components/ (layout, ui, features, 3d)
+- src/lib/ (supabase, utils, constants)
+- src/types/ (definiciones globales de TypeScript)
+
+## Convenciones
+- TypeScript estricto
+- Componentes funcionales con TypeScript
+- Server Actions para mutaciones de datos
+- Client Components solo cuando sea necesario (interactividad, hooks, 3D)
+

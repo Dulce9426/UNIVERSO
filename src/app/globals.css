@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 10 10 10;
+    --foreground: 255 255 255;
+    --card: 21 21 21;
+    --card-foreground: 255 255 255;
+    --popover: 21 21 21;
+    --popover-foreground: 255 255 255;
+    --primary: 0 255 255;
+    --primary-foreground: 10 10 10;
+    --secondary: 30 30 46;
+    --secondary-foreground: 255 255 255;
+    --muted: 30 30 46;
+    --muted-foreground: 156 163 175;
+    --accent: 0 255 255;
+    --accent-foreground: 10 10 10;
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
+    --border: 30 30 46;
+    --input: 30 30 46;
+    --ring: 0 255 255;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-cosmos-deep text-cosmos-starlight-white;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  
+  .glass-strong {
+    @apply bg-white/10 backdrop-blur-lg border border-white/20;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+  
+  .neon-cyan {
+    @apply text-cosmos-neon-cyan;
+    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
+  }
+}
+
