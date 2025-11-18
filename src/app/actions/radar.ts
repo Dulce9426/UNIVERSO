@@ -1,6 +1,6 @@
 "use server"
 
-import { createClient } from "@/lib/supabase/server"
+import { createPublicClient } from "@/lib/supabase/public"
 
 export interface RadarNewsItem {
   id: string
@@ -17,7 +17,7 @@ export interface RadarNewsItem {
 }
 
 export async function getRadarNews(): Promise<RadarNewsItem[]> {
-  const supabase = await createClient()
+  const supabase = createPublicClient()
 
   const { data, error } = await supabase
     .from("radar_news")
@@ -41,7 +41,7 @@ export async function getRadarNewsById(id: string): Promise<RadarNewsItem | null
       return null
     }
 
-    const supabase = await createClient()
+    const supabase = createPublicClient()
 
     const { data, error } = await supabase
       .from("radar_news")

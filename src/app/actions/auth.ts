@@ -65,7 +65,7 @@ export async function signOut() {
   const { error } = await supabase.auth.signOut()
 
   if (error) {
-    return { error: error.message }
+    console.error("Error signing out:", error.message)
   }
 
   revalidatePath("/", "layout")

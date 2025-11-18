@@ -36,7 +36,9 @@ export default async function Navbar() {
                   <User size={20} />
                   <span className="hidden sm:inline">Perfil</span>
                 </Link>
-                <form action={signOut}>
+                <form action={async () => {
+                  await signOut()
+                }}>
                   <Button
                     type="submit"
                     variant="ghost"

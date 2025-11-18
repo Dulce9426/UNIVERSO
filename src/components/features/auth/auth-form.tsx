@@ -27,7 +27,7 @@ export default function AuthForm() {
 
       if (result?.error) {
         setError(result.error)
-      } else if (result?.message) {
+      } else if (result && 'message' in result) {
         setMessage(result.message)
       }
     } catch (err) {
