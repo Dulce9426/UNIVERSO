@@ -6,6 +6,20 @@ import { X, Info, Compass, ChevronRight } from 'lucide-react';
 
 const planets = [
   { 
+    id: 'sun', 
+    name: 'SUN',
+    displayName: 'Sol', 
+    orbitColor: '#FFD700',
+    planetColor: '#FFD700', 
+    size: 24, 
+    orbit: 0, 
+    speed: 0, 
+    desc: 'La estrella en el centro de nuestro sistema solar. Su masa constituye el 99.86% de la masa total del sistema.',
+    stats: { temp: '5500°C', day: '27 días' },
+    texture: '/textures/8k_sun.jpg',
+    fact: 'La estrella que da vida a nuestro sistema.'
+  },
+  { 
     id: 'mercury', 
     name: 'MERCURY',
     displayName: 'Mercurio', 
@@ -16,7 +30,7 @@ const planets = [
     speed: 30, 
     desc: 'El planeta más pequeño y cercano al Sol. Se encoge lentamente debido al enfriamiento de su núcleo, generando "arrugas" en su superficie.',
     stats: { temp: '430°C', day: '59 días' },
-    texture: 'https://www.solarsystemscope.com/textures/download/8k_mercury.jpg',
+    texture: '/textures/8k_mercury.jpg',
     fact: 'Se encoge cada día más.'
   },
   { 
@@ -30,7 +44,7 @@ const planets = [
     speed: 50, 
     desc: 'Un mundo infernal con un efecto invernadero descontrolado. Su densa atmósfera de dióxido de carbono oculta su superficie volcánica.',
     stats: { temp: '462°C', day: '243 días' },
-    texture: 'https://www.solarsystemscope.com/textures/download/8k_venus_surface.jpg',
+    texture: '/textures/8k_venus_surface.jpg',
     fact: 'Su día es más largo que su año.'
   },
   { 
@@ -44,7 +58,7 @@ const planets = [
     speed: 70, 
     desc: 'Nuestro hogar. El único lugar conocido con vida y océanos de agua líquida estables en la superficie.',
     stats: { temp: '15°C', day: '24 horas' },
-    texture: 'https://www.solarsystemscope.com/textures/download/8k_earth_daymap.jpg',
+    texture: '/textures/8k_earth_daymap.jpg',
     fact: 'El único con agua líquida visible.'
   },
   { 
@@ -58,7 +72,7 @@ const planets = [
     speed: 90, 
     desc: 'El planeta rojo. Tiene el volcán más grande del sistema solar (Monte Olimpo) y vastos cañones. Objetivo principal para futuras colonias.',
     stats: { temp: '-60°C', day: '24h 37m' },
-    texture: 'https://www.solarsystemscope.com/textures/download/8k_mars.jpg',
+    texture: '/textures/8k_mars.jpg',
     fact: 'Tiene el volcán más grande del sistema.'
   },
   { 
@@ -72,7 +86,7 @@ const planets = [
     speed: 150, 
     desc: 'El gigante gaseoso. Su masa es 2.5 veces la de todos los demás planetas juntos. Actúa como un "escudo" para la Tierra desviando asteroides.',
     stats: { temp: '-145°C', day: '9h 56m' },
-    texture: 'https://www.solarsystemscope.com/textures/download/8k_jupiter.jpg',
+    texture: '/textures/8k_jupiter.jpg',
     fact: 'Protege a la Tierra de asteroides.'
   },
   { 
@@ -86,7 +100,7 @@ const planets = [
     speed: 200, 
     desc: 'La joya del sistema solar, famoso por su complejo sistema de anillos hechos de hielo y roca. Podría flotar en una piscina gigante de agua.',
     stats: { temp: '-178°C', day: '10h 42m' },
-    texture: 'https://www.solarsystemscope.com/textures/download/8k_saturn.jpg',
+    texture: '/textures/8k_saturn.jpg',
     fact: 'Sus anillos son hielo y roca.'
   }
 ];
@@ -159,6 +173,9 @@ export default function SolarRadar() {
     }).toUpperCase();
   };
 
+  const sun = planets.find(p => p.id === 'sun')!;
+  const otherPlanets = planets.filter(p => p.id !== 'sun');
+
   return (
     <div className="relative w-full h-[600px] bg-black overflow-hidden rounded-lg border border-white/10 my-8 flex">
       
@@ -204,8 +221,26 @@ export default function SolarRadar() {
 
         {/* Contenedor centrado para el sistema solar */}
         <div className="relative w-full h-full flex items-center justify-center">
+          {/* Sol Central (clicable) */}
+          <div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center cursor-pointer group"
+            onClick={() => setSelected(sun)}
+          >
+            <div 
+              className="rounded-full bg-yellow-400 transition-transform group-hover:scale-110"
+              style={{
+                width: '24px',
+                height: '24px',
+                boxShadow: '0 0 30px rgba(255, 200, 0, 0.8)',
+              }}
+            />
+            <span className="text-xs font-mono text-white uppercase tracking-wider mt-2">
+              SUN
+            </span>
+          </div>
+
           {/* Órbitas y Planetas */}
-          {planets.map((planet) => (
+          {otherPlanets.map((planet) => (
             <div key={planet.id} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
               {/* Línea orbital */}
               <svg
@@ -279,21 +314,6 @@ export default function SolarRadar() {
               </motion.div>
             </div>
           ))}
-
-          {/* El Sol */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center">
-            <div 
-              className="rounded-full bg-yellow-400"
-              style={{
-                width: '24px',
-                height: '24px',
-                boxShadow: '0 0 30px rgba(255, 200, 0, 0.8)',
-              }}
-            />
-            <span className="text-xs font-mono text-white uppercase tracking-wider mt-2">
-              SUN
-            </span>
-          </div>
         </div>
       </div>
 
@@ -336,7 +356,7 @@ export default function SolarRadar() {
               <X className="w-6 h-6" />
             </button>
 
-            {/* Planeta Giratorio Falso 3D Mejorado */}
+            {/* Planeta/Sol Giratorio Falso 3D Mejorado */}
             <div className="relative w-72 h-72 md:w-96 md:h-96 flex-shrink-0">
               {/* Efecto especial para Tierra: Atmósfera/Halo */}
               {selected.id === 'earth' && (
@@ -348,16 +368,16 @@ export default function SolarRadar() {
                 />
               )}
               
-              {/* Contenedor del planeta */}
+              {/* Contenedor del planeta/sol */}
               <div className="relative w-full h-full rounded-full shadow-[inset_-30px_-20px_60px_rgba(0,0,0,0.9)] overflow-hidden border border-white/10">
                 <div 
                   className="w-full h-full rounded-full"
                   style={{
                     backgroundImage: `url(${selected.texture})`,
-                    backgroundSize: '200% auto',
-                    backgroundPosition: '0% center',
+                    backgroundSize: selected.id === 'sun' ? '100% auto' : '200% auto',
+                    backgroundPosition: selected.id === 'sun' ? 'center center' : '0% center',
                     backgroundColor: selected.planetColor,
-                    animation: 'spin-planet 30s linear infinite',
+                    animation: selected.id === 'sun' ? 'none' : 'spin-planet 30s linear infinite',
                   }}
                 />
                 {/* Sombra interna mejorada para realismo */}
@@ -387,6 +407,21 @@ export default function SolarRadar() {
                       width: '110%',
                       height: '110%',
                       background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)',
+                    }}
+                  />
+                </div>
+              )}
+
+              {/* Efecto especial para el Sol: resplandor adicional */}
+              {selected.id === 'sun' && (
+                <div className="absolute inset-0 rounded-full pointer-events-none">
+                  <div 
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+                    style={{
+                      width: '120%',
+                      height: '120%',
+                      background: 'radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, rgba(255, 165, 0, 0.2) 50%, transparent 100%)',
+                      filter: 'blur(20px)',
                     }}
                   />
                 </div>
