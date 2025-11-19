@@ -14,9 +14,9 @@ const planets = [
     size: 6, 
     orbit: 80, 
     speed: 30, 
-    desc: 'El planeta más pequeño. Se encoge lentamente debido al enfriamiento de su núcleo.',
+    desc: 'El planeta más pequeño y cercano al Sol. Se encoge lentamente debido al enfriamiento de su núcleo, generando "arrugas" en su superficie.',
     stats: { temp: '430°C', day: '59 días' },
-    texture: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Mercury_colorenhanced.png',
+    texture: 'https://www.solarsystemscope.com/textures/download/8k_mercury.jpg',
     fact: 'Se encoge cada día más.'
   },
   { 
@@ -28,9 +28,9 @@ const planets = [
     size: 8, 
     orbit: 120, 
     speed: 50, 
-    desc: 'Un mundo infernal. Su atmósfera atrapa el calor haciéndolo más caliente que Mercurio.',
+    desc: 'Un mundo infernal con un efecto invernadero descontrolado. Su densa atmósfera de dióxido de carbono oculta su superficie volcánica.',
     stats: { temp: '462°C', day: '243 días' },
-    texture: 'https://upload.wikimedia.org/wikipedia/commons/1/1c/Solar_System_Portal_Venus_Globe.jpg',
+    texture: 'https://www.solarsystemscope.com/textures/download/8k_venus_surface.jpg',
     fact: 'Su día es más largo que su año.'
   },
   { 
@@ -42,9 +42,9 @@ const planets = [
     size: 8, 
     orbit: 160, 
     speed: 70, 
-    desc: 'Nuestro hogar. El único lugar conocido con vida y océanos de agua líquida.',
+    desc: 'Nuestro hogar. El único lugar conocido con vida y océanos de agua líquida estables en la superficie.',
     stats: { temp: '15°C', day: '24 horas' },
-    texture: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Solarsystemscope_texture_8k_earth_daymap.jpg/1200px-Solarsystemscope_texture_8k_earth_daymap.jpg',
+    texture: 'https://www.solarsystemscope.com/textures/download/8k_earth_daymap.jpg',
     fact: 'El único con agua líquida visible.'
   },
   { 
@@ -56,9 +56,9 @@ const planets = [
     size: 7, 
     orbit: 200, 
     speed: 90, 
-    desc: 'El planeta rojo. Objetivo principal de la humanidad para futuras colonias.',
+    desc: 'El planeta rojo. Tiene el volcán más grande del sistema solar (Monte Olimpo) y vastos cañones. Objetivo principal para futuras colonias.',
     stats: { temp: '-60°C', day: '24h 37m' },
-    texture: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/1200px-OSIRIS_Mars_true_color.jpg',
+    texture: 'https://www.solarsystemscope.com/textures/download/8k_mars.jpg',
     fact: 'Tiene el volcán más grande del sistema.'
   },
   { 
@@ -70,9 +70,9 @@ const planets = [
     size: 24, 
     orbit: 280, 
     speed: 150, 
-    desc: 'El gigante gaseoso. Una estrella fallida que protege a la Tierra desviando asteroides.',
+    desc: 'El gigante gaseoso. Su masa es 2.5 veces la de todos los demás planetas juntos. Actúa como un "escudo" para la Tierra desviando asteroides.',
     stats: { temp: '-145°C', day: '9h 56m' },
-    texture: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg',
+    texture: 'https://www.solarsystemscope.com/textures/download/8k_jupiter.jpg',
     fact: 'Protege a la Tierra de asteroides.'
   },
   { 
@@ -84,9 +84,9 @@ const planets = [
     size: 20, 
     orbit: 340, 
     speed: 200, 
-    desc: 'La joya del sistema solar. Sus anillos son tan anchos como la distancia Tierra-Luna.',
+    desc: 'La joya del sistema solar, famoso por su complejo sistema de anillos hechos de hielo y roca. Podría flotar en una piscina gigante de agua.',
     stats: { temp: '-178°C', day: '10h 42m' },
-    texture: 'https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg',
+    texture: 'https://www.solarsystemscope.com/textures/download/8k_saturn.jpg',
     fact: 'Sus anillos son hielo y roca.'
   }
 ];
@@ -119,7 +119,7 @@ export default function SolarRadar() {
     return () => clearInterval(timer);
   }, []);
 
-  // Inyectar animación CSS para la rotación del planeta
+  // Inyectar animación CSS mejorada para la rotación del planeta
   useEffect(() => {
     const styleId = 'planet-spin-animation';
     const existingStyle = document.getElementById(styleId);
@@ -132,7 +132,7 @@ export default function SolarRadar() {
     style.textContent = `
       @keyframes spin-planet {
         from { background-position: 0% center; }
-        to { background-position: 200% center; }
+        to { background-position: 100% center; }
       }
     `;
     document.head.appendChild(style);
@@ -336,7 +336,7 @@ export default function SolarRadar() {
               <X className="w-6 h-6" />
             </button>
 
-            {/* Planeta Giratorio Falso 3D */}
+            {/* Planeta Giratorio Falso 3D Mejorado */}
             <div className="relative w-72 h-72 md:w-96 md:h-96 flex-shrink-0">
               {/* Efecto especial para Tierra: Atmósfera/Halo */}
               {selected.id === 'earth' && (
@@ -354,14 +354,14 @@ export default function SolarRadar() {
                   className="w-full h-full rounded-full"
                   style={{
                     backgroundImage: `url(${selected.texture})`,
-                    backgroundSize: selected.id === 'earth' ? '200% auto' : 'cover',
-                    backgroundPosition: 'center',
+                    backgroundSize: '200% auto',
+                    backgroundPosition: '0% center',
                     backgroundColor: selected.planetColor,
                     animation: 'spin-planet 30s linear infinite',
                   }}
                 />
-                {/* Sombra interna extra para realismo */}
-                <div className="absolute inset-0 rounded-full shadow-[inset_10px_10px_40px_rgba(255,255,255,0.1)] pointer-events-none" />
+                {/* Sombra interna mejorada para realismo */}
+                <div className="absolute inset-0 rounded-full shadow-[inset_10px_10px_40px_rgba(0,0,0,0.4),_0_0_40px_rgba(0,150,255,0.1)] pointer-events-none" />
               </div>
 
               {/* Efecto de anillo atmosférico para Tierra (similar a Saturno) */}
