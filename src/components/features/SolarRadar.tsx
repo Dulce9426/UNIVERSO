@@ -337,18 +337,60 @@ export default function SolarRadar() {
             </button>
 
             {/* Planeta Giratorio Falso 3D */}
-            <div className="relative w-72 h-72 md:w-96 md:h-96 flex-shrink-0 rounded-full shadow-[inset_-30px_-20px_60px_rgba(0,0,0,0.9)] overflow-hidden border border-white/10">
-              <div 
-                className="w-full h-full rounded-full"
-                style={{
-                  backgroundImage: `url(${selected.texture})`,
-                  backgroundSize: 'cover',
-                  backgroundColor: selected.planetColor,
-                  animation: 'spin-planet 30s linear infinite',
-                }}
-              />
-              {/* Sombra interna extra para realismo */}
-              <div className="absolute inset-0 rounded-full shadow-[inset_10px_10px_40px_rgba(255,255,255,0.1)] pointer-events-none" />
+            <div className="relative w-72 h-72 md:w-96 md:h-96 flex-shrink-0">
+              {/* Efecto especial para Tierra: Atmósfera/Halo */}
+              {selected.id === 'earth' && (
+                <div 
+                  className="absolute inset-0 rounded-full blur-3xl scale-125 pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(circle, rgba(96, 165, 250, 0.2) 0%, rgba(59, 130, 246, 0.1) 50%, transparent 100%)',
+                  }}
+                />
+              )}
+              
+              {/* Contenedor del planeta */}
+              <div className="relative w-full h-full rounded-full shadow-[inset_-30px_-20px_60px_rgba(0,0,0,0.9)] overflow-hidden border border-white/10">
+                <div 
+                  className="w-full h-full rounded-full"
+                  style={{
+                    backgroundImage: `url(${selected.texture})`,
+                    backgroundSize: selected.id === 'earth' ? '200% auto' : 'cover',
+                    backgroundPosition: 'center',
+                    backgroundColor: selected.planetColor,
+                    animation: 'spin-planet 30s linear infinite',
+                  }}
+                />
+                {/* Sombra interna extra para realismo */}
+                <div className="absolute inset-0 rounded-full shadow-[inset_10px_10px_40px_rgba(255,255,255,0.1)] pointer-events-none" />
+              </div>
+
+              {/* Efecto de anillo atmosférico para Tierra (similar a Saturno) */}
+              {selected.id === 'earth' && (
+                <div className="absolute inset-0 rounded-full pointer-events-none" style={{ transform: 'scale(1.15)' }}>
+                  <div 
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-blue-400/40"
+                    style={{
+                      width: '100%',
+                      height: '60%',
+                      boxShadow: '0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(59, 130, 246, 0.2)',
+                    }}
+                  />
+                </div>
+              )}
+
+              {/* Brillo atmosférico adicional para Tierra */}
+              {selected.id === 'earth' && (
+                <div className="absolute inset-0 rounded-full pointer-events-none">
+                  <div 
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+                    style={{
+                      width: '110%',
+                      height: '110%',
+                      background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)',
+                    }}
+                  />
+                </div>
+              )}
             </div>
 
             {/* Panel de Texto */}
